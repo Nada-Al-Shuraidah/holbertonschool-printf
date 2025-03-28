@@ -34,6 +34,10 @@ while (*format)
 if (*format == '%')
 {
 format++;
+if (*format == '\0') /* If the end of the string */
+{
+return (-1); /* Error % cannot be processed */
+}
 switch (*format)
 {
 case 'c': /* Letter printing */
@@ -51,7 +55,9 @@ break;
 case '%': /* Print */
 count += write(1, "%", 1);
 break;
-default:
+default: /* If the format is nit supported, such as %K or %! */
+count += write(1, "%", 1);
+count += write(1, format, 1);
 break;
 }
 }
