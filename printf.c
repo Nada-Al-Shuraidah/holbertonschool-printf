@@ -1,6 +1,7 @@
 #include "main.h"
 #include <stdarg.h>
 #include <unistd.h>
+#include <string.h>
 
 /**
  * _printf - Produces output according to a specific format
@@ -36,8 +37,11 @@ format++;
 switch (*format)
 {
 case 'c': /* Letter printing */
-count += write(1, &(char){va_arg(args, int)}, 1);
+{
+char c = va_arg(args, int);
+count += write(1, &c, 1);
 break;
+}
 case 's': /* Ptint a text string */
 str = va_arg(args, char *);
 count += write(1, str, strlen(str));
