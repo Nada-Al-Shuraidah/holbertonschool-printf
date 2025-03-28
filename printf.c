@@ -68,9 +68,12 @@ va_start(args, format);
 
 while (*format)
 {
-if (*format == '%')
+if (*format == '%') /* Processing format status */
 {
 format++;
+if (*format == '\0') /* If % is at the end of the string */
+return (-1); /* Return error */
+
 switch (*format)
 {
 case 'c':
@@ -83,7 +86,7 @@ case '%':
 count += handle_percent();
 break;
 default:
-count += write(1, "%", 1);
+count += write(1, "%", 1); /* Print % as a normal letter */
 count += write(1, format, 1);
 break;
 }
