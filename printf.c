@@ -44,6 +44,8 @@ break;
 }
 case 's': /* Ptint a text string */
 str = va_arg(args, char *);
+if (!str) /*If the string NULL */
+str = "(null)";
 count += write(1, str, strlen(str));
 break;
 case '%': /* Print */
